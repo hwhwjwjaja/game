@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#080b12">
+<title>JAM ARENA ⚡</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800;900&display=swap');
+
+:root{
+  --bg:#080b12;
+  --panel:#111824;
+  --green:#b6ff4a;
+  --cyan:#39e7ff;
+  --text:#f3f7ff;
+  --muted:#8d9bb0;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  min-height:100vh;
+  font-family:Vazirmatn,Tahoma,sans-serif;
+  color:var(--text);
+  background:
+    radial-gradient(ellipse at 10% 0%,#153326,transparent 35%),
+    radial-gradient(ellipse at 100% 20%,#10243b,transparent 35%),
+    var(--bg);
+}
+button,input{font:inherit}
+button{cursor:pointer}
+button:active{transform:scale(.98)}
+.container{width:min(100% - 24px,850px);margin:auto}
+header{
+  display:flex;justify-content:space-between;
+  align-items:center;padding:20px 0;gap:10px
+}
+.logo{font-size:21px;font-weight:900}
+.logo span{color:var(--green)}
+.status{
+  border:1px solid #315c39;background:#12251a;
+  color:var(--green);border-radius:30px;
+  padding:7px 12px;font-size:11px
+}
+.hero{text-align:center;padding:25px 0}
+.badge{
+  display:inline-block;border:1px solid #344b35;
+  color:var(--green);background:#132017;
+  border-radius:30px;padding:7px 13px;font-size:12px
+}
+h1{font-size:clamp(34px,8vw,55px);line-height:1.4;margin:15px 0 5px}
+h1 span{color:var(--green);text-shadow:0 0 25px #b6ff4a45}
+.subtitle{color:var(--muted);font-size:13px;line-height:2}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:15px 0}
+.stat,.card{
+  background:linear-gradient(145deg,#172231ed,#0c121cf5);
+  border:1px solid #ffffff12;border-radius:19px;
+}
+.stat{text-align:center;padding:14px 5px}
+.stat strong{display:block;font-size:21px;color:var(--green)}
+.stat small{font-size:11px;color:var(--muted)}
+.card{padding:20px;margin-bottom:15px}
+.title{font-size:18px;font-weight:900;margin:0 0 7px}
+.desc{font-size:12px;color:var(--muted);line-height:1.9;margin:0 0 18px}
+.choices{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}
+.choice{
+  min-height:108px;border-radius:17px;
+  border:1px solid #273648;background:#0b121d;
+  color:white;transition:.2s
+}
+.choice:hover,.choice.selected{border-color:var(--green);background:#17251b}
+.emoji{font-size:35px;display:block;margin-bottom:7px}
+.choice b{font-size:13px}
+.battle{
+  display:grid;grid-template-columns:1fr auto 1fr;
+  align-items:center;text-align:center;gap:9px;margin:20px 0
+}
+.player{padding:13px 4px;background:#0b121c;border:1px solid #ffffff12;border-radius:15px}
+.player small{font-size:11px;color:var(--muted)}
+.big{font-size:39px;display:block;margin:8px 0}
+.vs{font-size:14px;font-weight:900;color:var(--green)}
+.btn{
+  display:block;width:100%;border:0;border-radius:12px;
+  padding:13px;background:var(--green);color:#101609;
+  font-weight:900
+}
+.secondary{background:#172333;color:#e8f3ff;border:1px solid #2a3b50}
+.danger{background:#381923;color:#ff9cad;border:1px solid #733346}
+.result{
+  display:none;margin-top:14px;padding:13px;text-align:center;
+  border-radius:12px;background:#101b17;border:1px solid #34553b;line-height:2
+}
+.result.show{display:block}
+.result strong{color:var(--green)}
+.prizebox{
+  display:flex;align-items:center;justify-content:space-between;gap:10px;
+  padding:15px;background:#111e17;border:1px solid #294d31;border-radius:14px
+}
+.prizebox strong{font-size:22px;color:var(--green)}
+input{
+  width:100%;padding:13px;margin:7px 0 13px;
+  border-radius:11px;border:1px solid #2b394c;
+  outline:none;background:#080e17;color:white
+}
+input:focus{border-color:var(--green)}
+label{font-size:12px;color:#b7c4d5}
+.hidden{display:none!important}
+.adminhead{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.qr-area{
+  width:fit-content;max-width:100%;margin:18px auto;
+  padding:15px;border-radius:15px;background:white;text-align:center
+}
+#qrImage{display:block;width:230px;height:230px;max-width:100%}
+#qrCaption{color:#273449;font-weight:800}
+#qrLink{direction:ltr;text-align:left;overflow-wrap:anywhere;font-size:11px;color:#b6ff4a}
+.notice{font-size:11px;color:var(--muted);line-height:1.9;margin-top:12px}
+footer{text-align:center;padding:15px 0 28px;font-size:11px;color:#69778c}
+@media(max-width:400px){
+  .card{padding:15px}
+  .choice{min-height:98px}
+  .emoji{font-size:30px}
+  .logo{font-size:18px}
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+
+<header>
+  <div class="logo">⚡ JAM <span>ARENA</span></div>
+  <div class="status">● سیستم فعال</div>
+</header>
+
+<section class="hero">
+  <div class="badge">🎮 چالش با ربات</div>
+  <h1>بازی کن، <span>جم ببر!</span></h1>
+  <p class="subtitle">حرکتت رو انتخاب کن و ربات رو شکست بده.<br>آماده‌ای قهرمان؟</p>
+</section>
+
+<div class="stats">
+  <div class="stat"><strong id="wins">0</strong><small>بردهای تو</small></div>
+  <div class="stat"><strong id="gems">0 💎</strong><small>جم نمایشی</small></div>
+  <div class="stat"><strong id="rounds">0</strong><small>تعداد بازی</small></div>
+</div>
+
+<section class="card">
+  <h2 class="title">⚔️ میدان نبرد</h2>
+  <p class="desc">یکی از گزینه‌ها رو انتخاب کن و شروع نبرد رو بزن.</p>
+
+  <div class="choices">
+    <button class="choice" data-move="rock"><span class="emoji">🪨</span><b>سنگ</b></button>
+    <button class="choice" data-move="paper"><span class="emoji">📄</span><b>کاغذ</b></button>
+    <button class="choice" data-move="scissors"><span class="emoji">✂️</span><b>قیچی</b></button>
+  </div>
+
+  <div class="battle">
+    <div class="player"><small>بازیکن</small><span class="big" id="myMove">❔</span><b>تو</b></div>
+    <div class="vs">VS</div>
+    <div class="player"><small>ربات</small><span class="big" id="botMove">🤖</span><b>حریف</b></div>
+  </div>
+
+  <button class="btn" id="playBtn">⚡ شروع نبرد</button>
+  <div class="result" id="result"></div>
+</section>
+
+<section class="card">
+  <h2 class="title">💎 جایزه‌های من</h2>
+  <p class="desc">جم‌های دریافت‌شده در همین مرورگر نمایش داده می‌شوند.</p>
+  <div class="prizebox">
+    <div><small style="color:var(--muted)">موجودی جم</small><br><strong id="wallet">0 💎</strong></div>
+    <button class="btn secondary" id="refreshBtn" style="width:auto">به‌روزرسانی</button>
+  </div>
+  <p id="prizeMessage" class="notice">هنوز جایزه‌ای دریافت نشده است.</p>
+</section>
+
+<section class="card" id="adminLogin">
+  <h2 class="title">🔐 ورود مدیریت</h2>
+  <p class="desc">برای ساخت QR Code جایزه وارد شو.</p>
+  <label for="adminUser">نام کاربری</label>
+  <input id="adminUser" autocomplete="username" placeholder="نام کاربری">
+  <label for="adminPass">رمز عبور</label>
+  <input id="adminPass" type="password" autocomplete="current-password" placeholder="رمز عبور">
+  <button class="btn" id="loginBtn">ورود به پنل ←</button>
+  <p id="loginMessage" class="notice"></p>
+</section>
+
+<section class="card hidden" id="adminPanel">
+  <div class="adminhead">
+    <h2 class="title">🛡️ پنل مدیریت</h2>
+    <button class="btn danger" id="logoutBtn" style="width:auto;padding:9px 12px">خروج</button>
+  </div>
+  <p class="desc">مقدار جم رو وارد کن و QR Code بساز.</p>
+
+  <label for="gemAmount">مقدار جم</label>
+  <input id="gemAmount" type="number" min="1" max="1000000" placeholder="مثلاً 500">
+
+  <button class="btn" id="createQrBtn">💎 ساخت QR Code</button>
+
+  <div id="qrResult" class="hidden">
+    <div class="qr-area">
+      <img id="qrImage" alt="QR Code جایزه">
+      <p style="color:#17202d;font-weight:900;margin-bottom:5px">JAM ARENA</p>
+      <p id="qrCaption">جایزه جم</p>
+    </div>
+
+    <label>لینک جایزه</label>
+    <div id="qrLink"></div>
+
+    <button class="btn secondary" id="copyLinkBtn" style="margin-top:12px">📋 کپی لینک</button>
+    <button class="btn" id="downloadQrBtn" style="margin-top:10px">⬇️ دانلود QR Code</button>
+  </div>
+
+  <p class="notice">
+    مقدار جم در لینک به حروف تبدیل می‌شود. این کدگذاری امنیت ایجاد نمی‌کند.
+    QR Code برای تولید تصویر از سرویس آنلاین استفاده می‌کند.
+  </p>
+</section>
+
+<footer>⚡ JAM ARENA · PLAY YOUR GAME</footer>
+</div>
+
+<script>
+"use strict";
+
+const $ = id => document.getElementById(id);
+
+const alphabet = "QWERTYUIOPASDFGHJKLZXCVBNM";
+const moves = {
+  rock:{label:"سنگ",emoji:"🪨"},
+  paper:{label:"کاغذ",emoji:"📄"},
+  scissors:{label:"قیچی",emoji:"✂️"}
+};
+
+let selected = null;
+let wins = Number(localStorage.getItem("ja_wins") || 0);
+let rounds = Number(localStorage.getItem("ja_rounds") || 0);
+let gems = Number(localStorage.getItem("ja_gems") || 0);
+
+/* تبدیل عدد به حروف */
+function encodeGems(number){
+  let n = number;
+  let result = "";
+  do{
+    result = alphabet[n % alphabet.length] + result;
+    n = Math.floor(n / alphabet.length);
+  }while(n > 0);
+  return result;
+}
+
+/* تبدیل حروف به عدد */
+function decodeGems(code){
+  if(typeof code !== "string" || !code.length || code.length > 8) return null;
+
+  let number = 0;
+  for(const char of code){
+    const digit = alphabet.indexOf(char);
+    if(digit < 0) return null;
+    number = number * alphabet.length + digit;
+    if(!Number.isSafeInteger(number)) return null;
+  }
+  return number;
+}
+
+/* کدگذاری لینک */
+function encodePayload(data){
+  const bytes = new TextEncoder().encode(JSON.stringify(data));
+  let binary = "";
+  bytes.forEach(b => binary += String.fromCharCode(b));
+  return btoa(binary).replace(/\+/g,"-").replace(/\//g,"_").replace(/=+$/,"");
+}
+
+function decodePayload(value){
+  try{
+    let b64 = value.replace(/-/g,"+").replace(/_/g,"/");
+    b64 += "=".repeat((4 - b64.length % 4) % 4);
+    const binary = atob(b64);
+    const bytes = Uint8Array.from(binary,c => c.charCodeAt(0));
+    return JSON.parse(new TextDecoder().decode(bytes));
+  }catch(e){
+    return null;
+  }
+}
+
+function updateStats(){
+  $("wins").textContent = wins;
+  $("rounds").textContent = rounds;
+  $("gems").textContent = gems + " 💎";
+  $("wallet").textContent = gems + " 💎";
+
+  localStorage.setItem("ja_wins",wins);
+  localStorage.setItem("ja_rounds",rounds);
+  localStorage.setItem("ja_gems",gems);
+}
+
+function showMessage(message){
+  $("prizeMessage").textContent = message;
+}
+
+document.querySelectorAll(".choice").forEach(button=>{
+  button.addEventListener("click",()=>{
+    document.querySelectorAll(".choice").forEach(b=>b.classList.remove("selected"));
+    button.classList.add("selected");
+    selected = button.dataset.move;
+  });
+});
+
+$("playBtn").addEventListener("click",()=>{
+  if(!selected){
+    $("result").className = "result show";
+    $("result").textContent = "اول سنگ، کاغذ یا قیچی رو انتخاب کن!";
+    return;
+  }
+
+  const options = Object.keys(moves);
+  const bot = options[Math.floor(Math.random()*options.length)];
+
+  $("myMove").textContent = moves[selected].emoji;
+  $("botMove").textContent = moves[bot].emoji;
+  rounds++;
+
+  let message;
+
+  if(selected === bot){
+    message = "🤝 مساوی شد!";
+  }else if(
+    (selected==="rock" && bot==="scissors") ||
+    (selected==="paper" && bot==="rock") ||
+    (selected==="scissors" && bot==="paper")
+  ){
+    wins++;
+    message = "🏆 آفرین! این دور رو بردی!";
+  }else{
+    message = "🤖 این دور رو ربات برد!";
+  }
+
+  $("result").className = "result show";
+  $("result").innerHTML =
+    "<strong>"+message+"</strong><br>تو: "+
+    moves[selected].label+" | ربات: "+moves[bot].label;
+
+  updateStats();
+});
+
+$("refreshBtn").addEventListener("click",()=>{
+  updateStats();
+  showMessage("موجودی این مرورگر: "+gems+" جم نمایشی.");
+});
+
+/* ورود پنل */
+$("loginBtn").addEventListener("click",()=>{
+  if($("adminUser").value.trim()==="adminpanel" &&
+     $("adminPass").value==="adminhbr"){
+    $("adminLogin").classList.add("hidden");
+    $("adminPanel").classList.remove("hidden");
+    $("loginMessage").textContent="";
+    $("adminPass").value="";
+  }else{
+    $("loginMessage").textContent="❌ نام کاربری یا رمز اشتباه است.";
+  }
+});
+
+$("logoutBtn").addEventListener("click",()=>{
+  $("adminPanel").classList.add("hidden");
+  $("adminLogin").classList.remove("hidden");
+});
+
+/* ساخت QR با لینک حروفی */
+$("createQrBtn").addEventListener("click",()=>{
+  const amount = Number($("gemAmount").value);
+
+  if(!Number.isSafeInteger(amount) || amount < 1 || amount > 1000000){
+    alert("مقدار جم باید بین 1 تا 1000000 باشد.");
+    return;
+  }
+
+  const code = encodeGems(amount);
+
+  const payload = encodePayload({
+    type:"jam-arena",
+    gems:code
+  });
+
+  const prizeUrl = new URL(location.href);
+  prizeUrl.search = "";
+  prizeUrl.hash = "prize=" + payload;
+  const link = prizeUrl.href;
+
+  $("qrLink").textContent = link;
+  $("qrCaption").textContent = code + " · کد جایزه";
+  $("qrImage").src =
+    "https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=" +
+    encodeURIComponent(link);
+
+  $("qrResult").classList.remove("hidden");
+});
+
+/* کپی لینک */
+$("copyLinkBtn").addEventListener("click",async()=>{
+  const link = $("qrLink").textContent;
+  try{
+    await navigator.clipboard.writeText(link);
+    $("copyLinkBtn").textContent = "✅ کپی شد";
+  }catch(e){
+    prompt("لینک را کپی کن:",link);
+  }
+});
+
+/* دانلود QR */
+$("downloadQrBtn").addEventListener("click",async()=>{
+  try{
+    const response = await fetch($("qrImage").src);
+    if(!response.ok) throw new Error();
+    const blob = await response.blob();
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "jam-arena-qr.png";
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(()=>URL.revokeObjectURL(url),1500);
+  }catch(e){
+    alert("دانلود مستقیم ممکن نشد. روی تصویر QR نگه دار و گزینه دانلود تصویر را بزن.");
+  }
+});
+
+/* دریافت جایزه از لینک */
+if(location.hash.startsWith("#prize=")){
+  const payload = decodePayload(location.hash.slice(7));
+
+  if(payload && payload.type === "jam-arena"){
+    const amount = decodeGems(payload.gems);
+
+    if(amount !== null && amount >= 1 && amount <= 1000000){
+      const claimKey = "ja_claimed_" + payload.gems;
+
+      if(!localStorage.getItem(claimKey)){
+        gems += amount;
+        localStorage.setItem(claimKey,"1");
+        updateStats();
+        showMessage("🎉 "+amount+" جم نمایشی دریافت کردی!");
+      }else{
+        showMessage("این کد قبلاً در همین مرورگر استفاده شده است.");
+      }
+    }else{
+      showMessage("❌ کد جایزه معتبر نیست.");
+    }
+  }else{
+    showMessage("❌ لینک جایزه معتبر نیست.");
+  }
+
+  history.replaceState(null,"",location.pathname+location.search);
+}
+
+updateStats();
+</script>
+</body>
+  </html>
