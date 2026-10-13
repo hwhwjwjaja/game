@@ -38,6 +38,7 @@ body {
 button,input {font:inherit}
 button {cursor:pointer}
 button:active {transform:scale(.98)}
+button:disabled {opacity:.45;cursor:not-allowed;transform:none}
 .hidden {display:none!important}
 
 header {
@@ -179,6 +180,7 @@ input:focus {
   border:1px solid var(--border);
   padding:13px;
   border-radius:13px;
+  min-width:0;
 }
 
 .stat-label {
@@ -266,6 +268,18 @@ input:focus {
   font-weight:900;
 }
 
+.hint-card {
+  border-color:#00e5ff35;
+}
+
+.hint-number {
+  display:block;
+  font-size:25px;
+  font-weight:900;
+  color:var(--cyan);
+  margin:8px 0;
+}
+
 footer {
   color:#62776a;
   text-align:center;
@@ -292,14 +306,16 @@ footer {
 
 <main>
 
-<!-- صفحه اصلی بازی؛ بدون ورود -->
+<!-- بازی -->
 <section id="gamePage">
 
   <div class="card">
     <span class="badge">🎮 HACKING PROTOCOL</span>
+
     <h1 class="title" style="margin-top:12px">
       گاوصندوق <span class="neon">دیجیتالی</span>
     </h1>
+
     <p class="subtitle">
       رمز چهاررقمی را پیدا کن، قفل را باز کن و امتیاز بگیر!
     </p>
@@ -309,6 +325,7 @@ footer {
         <div class="stat-label">🪙 امتیاز من</div>
         <div class="stat-number" id="score">0</div>
       </div>
+
       <div class="stat">
         <div class="stat-label">🏆 مرحله</div>
         <div class="stat-number" id="level">1</div>
@@ -318,16 +335,19 @@ footer {
 
   <div class="card center">
     <div class="vault" id="vault">🔒</div>
+
     <p class="subtitle" id="gameHint">
       رمز مخفی را حدس بزن.
     </p>
 
-    <input id="guess"
+    <input
+      id="guess"
       class="code-input"
       inputmode="numeric"
       maxlength="4"
       placeholder="••••"
-      aria-label="رمز چهاررقمی">
+      aria-label="رمز چهاررقمی"
+    >
 
     <button class="btn primary" id="guessBtn">
       🔓 بررسی رمز
@@ -338,6 +358,53 @@ footer {
     </button>
 
     <div id="gameMessage" class="message"></div>
+  </div>
+
+  <!-- راهنمایی‌ها -->
+  <div class="card hint-card">
+    <h2 class="title">💡 راهنمای رمز</h2>
+
+    <p class="subtitle">
+      با خرج کردن امتیازهایت، رقم‌های رمز را به‌ترتیب پیدا کن.
+    </p>
+
+    <div class="grid">
+
+      <div class="stat center">
+        <div class="stat-label">🔢 رقم اول</div>
+        <div class="hint-number" id="hintOne">❓</div>
+        <button class="btn secondary" id="hintBtn1">
+          🔓 خرید · ۱۰ امتیاز
+        </button>
+      </div>
+
+      <div class="stat center">
+        <div class="stat-label">🔢 رقم دوم</div>
+        <div class="hint-number" id="hintTwo">❓</div>
+        <button class="btn secondary" id="hintBtn2" disabled>
+          🔒 خرید · ۲۰ امتیاز
+        </button>
+      </div>
+
+      <div class="stat center">
+        <div class="stat-label">🔢 رقم سوم</div>
+        <div class="hint-number" id="hintThree">❓</div>
+        <button class="btn secondary" id="hintBtn3" disabled>
+          🔒 خرید · ۳۰ امتیاز
+        </button>
+      </div>
+
+      <div class="stat center">
+        <div class="stat-label">🔢 رقم چهارم</div>
+        <div class="hint-number" id="hintFour">❓</div>
+        <button class="btn secondary" id="hintBtn4" disabled>
+          🔒 خرید · ۴۰ امتیاز
+        </button>
+      </div>
+
+    </div>
+
+    <div id="hintMessage" class="message"></div>
   </div>
 
   <div class="card">
@@ -354,25 +421,24 @@ footer {
 
 </section>
 
-<!-- ورود مدیر فقط برای مدیریت QR -->
+<!-- ورود مدیر -->
 <section id="loginPage" class="hidden">
   <div class="card">
     <div class="center" style="font-size:45px">🔐</div>
+
     <h1 class="title center">
       پنل <span class="neon">مدیریت</span>
     </h1>
+
     <p class="subtitle center">
       برای ساخت QR جایزه وارد شو.
     </p>
 
     <label for="username">نام کاربری</label>
-    <input id="username" autocomplete="username"
-      placeholder="نام کاربری">
+    <input id="username" autocomplete="username" placeholder="نام کاربری">
 
     <label for="password">رمز عبور</label>
-    <input id="password" type="password"
-      autocomplete="current-password"
-      placeholder="رمز عبور">
+    <input id="password" type="password" autocomplete="current-password" placeholder="رمز عبور">
 
     <button class="btn primary" id="loginBtn">
       ⚡ ورود به پنل
@@ -393,6 +459,7 @@ footer {
     <h1 class="title">
       👑 پنل <span class="neon">مدیریت</span>
     </h1>
+
     <p class="subtitle">
       مقدار جم را انتخاب کن و QR اختصاصی بساز.
     </p>
@@ -402,6 +469,7 @@ footer {
         <div class="stat-label">🎁 تعداد جوایز این مرورگر</div>
         <div class="stat-number" id="qrCount">0</div>
       </div>
+
       <div class="stat">
         <div class="stat-label">🪙 مجموع جم‌ها</div>
         <div class="stat-number" id="totalGems">0</div>
@@ -412,15 +480,11 @@ footer {
   <div class="card">
     <h2 class="title">🎁 ساخت QR جایزه</h2>
 
-    <label for="gemAmount">مقدار جم</label>
-    <input id="gemAmount" type="number"
-      min="1" max="1000000"
-      inputmode="numeric"
-      placeholder="مثلاً 500">
+    <label for="gemAmount">مقدار امتیاز جایزه</label>
+    <input id="gemAmount" type="number" min="1" max="1000000" inputmode="numeric" placeholder="مثلاً 500">
 
     <label for="rewardName">نام جایزه</label>
-    <input id="rewardName" maxlength="50"
-      placeholder="مثلاً جایزه ویژه">
+    <input id="rewardName" maxlength="50" placeholder="مثلاً جایزه ویژه">
 
     <button class="btn primary" id="createQrBtn">
       ⚡ ساخت QR
@@ -449,17 +513,18 @@ footer {
 <section id="rewardPage" class="hidden">
   <div class="card center">
     <div style="font-size:55px">🎁</div>
+
     <h1 class="title">
       جایزه <span class="neon">ویژه</span>
     </h1>
 
-    <div class="reward-amount" id="rewardAmount">0 جم</div>
+    <div class="reward-amount" id="rewardAmount">0 امتیاز</div>
     <h2 id="rewardTitle">جایزه EZPRO</h2>
 
     <div id="rewardMessage" class="message"></div>
 
     <button class="btn primary" id="claimBtn">
-      🎁 ثبت نمایشی جایزه
+      🎁 دریافت جایزه
     </button>
 
     <button class="btn secondary" id="rewardBackBtn">
@@ -485,10 +550,27 @@ const STORAGE = {
   claimed: 'ezpro_hacker_claimed'
 };
 
+const HINT_COSTS = [10, 20, 30, 40];
+
+const HINT_IDS = [
+  'hintOne',
+  'hintTwo',
+  'hintThree',
+  'hintFour'
+];
+
+const HINT_BUTTON_IDS = [
+  'hintBtn1',
+  'hintBtn2',
+  'hintBtn3',
+  'hintBtn4'
+];
+
 let secretCode = '';
 let attempts = 0;
 let solved = false;
 let currentReward = null;
+let purchasedHints = [];
 
 function readJSON(key, fallback) {
   try {
@@ -500,16 +582,23 @@ function readJSON(key, fallback) {
 }
 
 function score() {
-  return Number(localStorage.getItem(STORAGE.score)) || 0;
+  return Math.max(
+    0,
+    Number(localStorage.getItem(STORAGE.score)) || 0
+  );
 }
 
 function level() {
-  return Number(localStorage.getItem(STORAGE.level)) || 1;
+  return Math.max(
+    1,
+    Number(localStorage.getItem(STORAGE.level)) || 1
+  );
 }
 
 function updateStats() {
   $('score').textContent = score();
   $('level').textContent = level();
+
   $('bestScore').textContent =
     Number(localStorage.getItem(STORAGE.best)) || 0;
 }
@@ -532,21 +621,113 @@ function showPage(id) {
   window.scrollTo({top:0,behavior:'smooth'});
 }
 
+function updateHints() {
+  HINT_IDS.forEach((id,index) => {
+    const purchased = purchasedHints.includes(index);
+
+    $(id).textContent = purchased
+      ? secretCode[index]
+      : '❓';
+
+    const btn = $(HINT_BUTTON_IDS[index]);
+
+    if (purchased) {
+      btn.textContent = '✅ دریافت شد';
+      btn.disabled = true;
+    } else if (solved) {
+      btn.textContent = '🔒 مرحله تمام شد';
+      btn.disabled = true;
+    } else if (index < purchasedHints.length) {
+      btn.textContent = '🔒 ابتدا راهنمایی قبلی';
+      btn.disabled = true;
+    } else if (index > purchasedHints.length) {
+      btn.textContent = '🔒 ابتدا راهنمایی قبلی';
+      btn.disabled = true;
+    } else {
+      btn.textContent = `🔓 خرید · ${HINT_COSTS[index]} امتیاز`;
+      btn.disabled = false;
+    }
+  });
+}
+
+function buyHint(index) {
+  if (solved) {
+    message(
+      'hintMessage',
+      'این مرحله تمام شده است؛ مرحله جدید را شروع کن.',
+      'error'
+    );
+    return;
+  }
+
+  if (purchasedHints.includes(index)) {
+    message(
+      'hintMessage',
+      'این راهنمایی را قبلاً خریده‌ای.',
+      'error'
+    );
+    return;
+  }
+
+  if (index !== purchasedHints.length) {
+    message(
+      'hintMessage',
+      '💡 راهنمایی‌ها باید به‌ترتیب خریداری شوند.',
+      'error'
+    );
+    return;
+  }
+
+  const cost = HINT_COSTS[index];
+
+  if (score() < cost) {
+    message(
+      'hintMessage',
+      `❌ امتیاز کافی نداری!\nبرای این راهنمایی ${cost} امتیاز لازم است.`,
+      'error'
+    );
+    return;
+  }
+
+  const newScore = score() - cost;
+
+  localStorage.setItem(
+    STORAGE.score,
+    String(newScore)
+  );
+
+  purchasedHints.push(index);
+
+  updateStats();
+  updateHints();
+
+  message(
+    'hintMessage',
+    `🎉 راهنمایی ${index + 1} باز شد!\n🔢 رقم ${index + 1} رمز: ${secretCode[index]}\n🪙 ${cost} امتیاز مصرف شد.`,
+    'success'
+  );
+}
+
 function newLevel() {
-  secretCode = String(Math.floor(Math.random() * 10000))
-    .padStart(4,'0');
+  secretCode = String(
+    Math.floor(Math.random() * 10000)
+  ).padStart(4,'0');
 
   attempts = 0;
   solved = false;
+  purchasedHints = [];
 
   $('guess').value = '';
   $('vault').textContent = '🔒';
   $('vault').classList.remove('open');
 
   $('gameHint').textContent =
-    'رمز چهاررقمی را حدس بزن و راهنمایی بگیر.';
+    'رمز چهاررقمی را حدس بزن و برای راهنمایی امتیاز خرج کن.';
 
   message('gameMessage','');
+  message('hintMessage','');
+
+  updateHints();
 }
 
 function checkGuess() {
@@ -577,27 +758,30 @@ function checkGuess() {
 
     const earned = 10 + level() * 5;
     const newScore = score() + earned;
+
     const best = Math.max(
       newScore,
       Number(localStorage.getItem(STORAGE.best)) || 0
     );
 
-    localStorage.setItem(STORAGE.score,newScore);
-    localStorage.setItem(STORAGE.best,best);
-    localStorage.setItem(STORAGE.level,level()+1);
+    localStorage.setItem(STORAGE.score,String(newScore));
+    localStorage.setItem(STORAGE.best,String(best));
+    localStorage.setItem(STORAGE.level,String(level()+1));
 
     $('vault').textContent = '🔓';
     $('vault').classList.add('open');
 
-    $('gameHint').textContent = 'گاوصندوق با موفقیت باز شد!';
+    $('gameHint').textContent =
+      'گاوصندوق با موفقیت باز شد!';
 
     message(
       'gameMessage',
-      `🎉 آفرین! ${earned} امتیاز گرفتی.`,
+      `🎉 آفرین! رمز درست بود.\n🪙 ${earned} امتیاز گرفتی.`,
       'success'
     );
 
     updateStats();
+    updateHints();
     return;
   }
 
@@ -611,7 +795,7 @@ function checkGuess() {
 
   message(
     'gameMessage',
-    `❌ رمز اشتباه است!\n💡 ${hint}\n🎯 رقم‌های درست در جای درست: ${matching}`,
+    `❌ رمز اشتباه است!\n💡 ${hint}\n🎯 تعداد رقم‌های درست در جای درست: ${matching}`,
     'error'
   );
 }
@@ -622,7 +806,10 @@ function getRewards() {
 }
 
 function saveRewards(rewards) {
-  localStorage.setItem(STORAGE.rewards,JSON.stringify(rewards));
+  localStorage.setItem(
+    STORAGE.rewards,
+    JSON.stringify(rewards)
+  );
 }
 
 function makeId() {
@@ -634,9 +821,11 @@ function makeId() {
 
 function rewardURL(id) {
   const url = new URL(location.href);
+
   url.search = '';
   url.hash = '';
   url.searchParams.set('reward',id);
+
   return url.href;
 }
 
@@ -651,13 +840,17 @@ async function copyText(text) {
 
 function createQR() {
   const amount = Number($('gemAmount').value);
-  const name = $('rewardName').value.trim() || 'جایزه EZPRO';
+  const name =
+    $('rewardName').value.trim() || 'جایزه EZPRO';
 
-  if (!Number.isSafeInteger(amount) || amount < 1 ||
-      amount > 1000000) {
+  if (
+    !Number.isSafeInteger(amount) ||
+    amount < 1 ||
+    amount > 1000000
+  ) {
     message(
       'adminMessage',
-      'مقدار جم باید عدد صحیح بین ۱ تا ۱٬۰۰۰٬۰۰۰ باشد.',
+      'مقدار امتیاز باید عدد صحیح بین ۱ تا ۱٬۰۰۰٬۰۰۰ باشد.',
       'error'
     );
     return;
@@ -690,6 +883,7 @@ function createQR() {
   renderRewards();
 
   const url = rewardURL(reward.id);
+
   const imageURL =
     'https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=' +
     encodeURIComponent(url);
@@ -703,7 +897,7 @@ function createQR() {
   title.textContent = '🎁 ' + reward.name;
 
   const amountText = document.createElement('p');
-  amountText.textContent = reward.amount + ' جم';
+  amountText.textContent = reward.amount + ' امتیاز';
 
   const img = document.createElement('img');
   img.src = imageURL;
@@ -721,6 +915,7 @@ function createQR() {
   const download = document.createElement('button');
   download.className = 'btn secondary';
   download.textContent = '⬇️ دانلود تصویر QR';
+
   download.onclick = () => {
     const a = document.createElement('a');
     a.href = imageURL;
@@ -730,12 +925,20 @@ function createQR() {
     a.click();
   };
 
-  box.append(title,amountText,img,link,copy,download);
+  box.append(
+    title,
+    amountText,
+    img,
+    link,
+    copy,
+    download
+  );
+
   $('qrResult').appendChild(box);
 
   message(
     'adminMessage',
-    'QR ساخته شد. توجه: جوایز در این نسخه فقط محلی ذخیره می‌شوند.',
+    'QR ساخته شد. توجه: این نسخه جوایز را فقط در مرورگر فعلی ذخیره می‌کند.',
     'success'
   );
 }
@@ -744,6 +947,7 @@ function renderRewards() {
   const rewards = getRewards();
 
   $('qrCount').textContent = rewards.length;
+
   $('totalGems').textContent = rewards.reduce(
     (sum,item) => sum + (Number(item.amount) || 0),
     0
@@ -765,8 +969,9 @@ function renderRewards() {
     item.className = 'list-item';
 
     const title = document.createElement('strong');
+
     title.textContent =
-      `🎁 ${reward.name} — ${reward.amount} جم`;
+      `🎁 ${reward.name} — ${reward.amount} امتیاز`;
 
     const link = document.createElement('p');
     link.style.direction = 'ltr';
@@ -780,6 +985,7 @@ function renderRewards() {
     const remove = document.createElement('button');
     remove.className = 'btn danger';
     remove.textContent = '🗑️ حذف';
+
     remove.onclick = () => {
       if (!confirm('این جایزه حذف شود؟')) return;
 
@@ -787,55 +993,52 @@ function renderRewards() {
         getRewards().filter(r => r.id !== reward.id)
       );
 
-      renderRewards();
+                  renderRewards();
       $('qrResult').replaceChildren();
     };
 
-    item.append(title,link,copy,remove);
+    item.append(title, link, copy, remove);
     list.appendChild(item);
   });
 }
 
 function openReward(id) {
   const reward = getRewards().find(r => r.id === id);
-
   showPage('rewardPage');
 
   if (!reward) {
     currentReward = null;
-
     $('rewardAmount').textContent = '❌';
     $('rewardTitle').textContent = 'جایزه پیدا نشد';
     $('claimBtn').classList.add('hidden');
 
     message(
       'rewardMessage',
-      'این جایزه در مرورگر فعلی وجود ندارد.',
+      'این جایزه در مرورگر فعلی پیدا نشد.',
       'error'
     );
     return;
   }
 
   currentReward = reward;
-
-  $('rewardAmount').textContent = reward.amount + ' جم';
+  $('rewardAmount').textContent = reward.amount + ' امتیاز';
   $('rewardTitle').textContent = reward.name;
   $('claimBtn').classList.remove('hidden');
 
-  const claimed = readJSON(STORAGE.claimed,[]);
+  const claimed = readJSON(STORAGE.claimed, []);
   const alreadyClaimed =
     Array.isArray(claimed) && claimed.includes(reward.id);
 
   $('claimBtn').disabled = alreadyClaimed;
   $('claimBtn').textContent = alreadyClaimed
-    ? '✅ قبلاً ثبت شده'
-    : '🎁 ثبت نمایشی جایزه';
+    ? '✅ قبلاً دریافت شده'
+    : '🎁 دریافت امتیاز';
 
   message(
     'rewardMessage',
     alreadyClaimed
-      ? 'این جایزه قبلاً در همین مرورگر ثبت شده است.'
-      : 'این یک جایزه نمایشی است؛ دریافت آن جم واقعی بازی را اضافه نمی‌کند.',
+      ? 'این جایزه قبلاً در همین مرورگر دریافت شده است.'
+      : 'با دریافت جایزه، امتیاز به بازی اضافه می‌شود.',
     alreadyClaimed ? 'error' : ''
   );
 }
@@ -843,27 +1046,44 @@ function openReward(id) {
 function claimReward() {
   if (!currentReward) return;
 
-  const claimed = readJSON(STORAGE.claimed,[]);
+  const claimed = readJSON(STORAGE.claimed, []);
   const ids = Array.isArray(claimed) ? claimed : [];
 
   if (ids.includes(currentReward.id)) {
     message(
       'rewardMessage',
-      'این جایزه قبلاً در همین مرورگر ثبت شده است.',
+      'این جایزه قبلاً دریافت شده است.',
       'error'
     );
     return;
   }
 
   ids.push(currentReward.id);
-  localStorage.setItem(STORAGE.claimed,JSON.stringify(ids));
+  localStorage.setItem(
+    STORAGE.claimed,
+    JSON.stringify(ids)
+  );
+
+  const newScore = score() + Number(currentReward.amount);
+
+  localStorage.setItem(STORAGE.score, String(newScore));
+
+  localStorage.setItem(
+    STORAGE.best,
+    String(Math.max(
+      newScore,
+      Number(localStorage.getItem(STORAGE.best)) || 0
+    ))
+  );
+
+  updateStats();
 
   $('claimBtn').disabled = true;
-  $('claimBtn').textContent = '✅ ثبت شد';
+  $('claimBtn').textContent = '✅ دریافت شد';
 
   message(
     'rewardMessage',
-    `🎉 شما ${currentReward.amount} جم جایزه دریافت کردید! 🎁\nاین پیام نمایشی است و جم واقعی به حساب بازی اضافه نمی‌کند.`,
+    `🎉 ${currentReward.amount} امتیاز به حساب بازی اضافه شد!\n🏠 برگرد به بازی و با امتیازهایت راهنمایی بخر.`,
     'success'
   );
 }
@@ -876,7 +1096,7 @@ function login() {
     $('password').value = '';
     showPage('adminPage');
     renderRewards();
-    message('loginMessage','');
+    message('loginMessage', '');
   } else {
     message(
       'loginMessage',
@@ -892,46 +1112,51 @@ function logout() {
   showPage('gamePage');
 }
 
-$('guessBtn').addEventListener('click',checkGuess);
+$('guessBtn').addEventListener('click', checkGuess);
 
-$('guess').addEventListener('keydown',event => {
+$('guess').addEventListener('keydown', event => {
   if (event.key === 'Enter') checkGuess();
 });
 
-$('newGameBtn').addEventListener('click',newLevel);
+$('newGameBtn').addEventListener('click', newLevel);
 
-$('adminOpenBtn').addEventListener('click',() => {
+$('adminOpenBtn').addEventListener('click', () => {
   showPage('loginPage');
 });
 
-$('loginBtn').addEventListener('click',login);
+$('loginBtn').addEventListener('click', login);
 
-$('password').addEventListener('keydown',event => {
+$('password').addEventListener('keydown', event => {
   if (event.key === 'Enter') login();
 });
 
-$('username').addEventListener('keydown',event => {
+$('username').addEventListener('keydown', event => {
   if (event.key === 'Enter') login();
 });
 
-$('loginBackBtn').addEventListener('click',() => {
+$('loginBackBtn').addEventListener('click', () => {
   showPage('gamePage');
 });
 
-$('createQrBtn').addEventListener('click',createQR);
+$('createQrBtn').addEventListener('click', createQR);
 
-$('adminBackBtn').addEventListener('click',() => {
+$('adminBackBtn').addEventListener('click', () => {
   showPage('gamePage');
   updateStats();
 });
 
-$('logoutBtn').addEventListener('click',logout);
+$('logoutBtn').addEventListener('click', logout);
 
-$('claimBtn').addEventListener('click',claimReward);
+$('claimBtn').addEventListener('click', claimReward);
 
-$('rewardBackBtn').addEventListener('click',() => {
-  history.replaceState(null,'',location.pathname);
+$('rewardBackBtn').addEventListener('click', () => {
+  history.replaceState(null, '', location.pathname);
   showPage('gamePage');
+  updateStats();
+});
+
+HINT_BUTTON_IDS.forEach((id, index) => {
+  $(id).addEventListener('click', () => buyHint(index));
 });
 
 function init() {
