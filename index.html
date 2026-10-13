@@ -2,701 +2,955 @@
 <html lang="fa" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="theme-color" content="#080b10">
-<title>JAM ARENA PRO</title>
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800;900&display=swap');
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#050807">
+<title>EZPRO HACKER ⚡</title>
 
-:root{
-  --bg:#070a0f;
-  --card:rgba(17,24,33,.88);
-  --line:rgba(124,255,174,.14);
-  --green:#6affaa;
-  --cyan:#56f6ed;
-  --red:#ff6078;
-  --yellow:#ffe18b;
-  --muted:#8999a8;
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700;900&display=swap');
+
+:root {
+  --bg:#050807;
+  --panel:#0c1511;
+  --green:#00ff88;
+  --cyan:#00e5ff;
+  --text:#effff5;
+  --muted:#91a69a;
+  --border:#1b4430;
+  --red:#ff4564;
 }
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{
+
+* {
+  box-sizing:border-box;
+  -webkit-tap-highlight-color:transparent;
+}
+
+body {
   margin:0;
-  background:
-    radial-gradient(ellipse at 10% 0%,#123329 0,transparent 35%),
-    radial-gradient(ellipse at 100% 30%,#112531 0,transparent 30%),
-    var(--bg);
-  color:#f4fff8;
-  font-family:Vazirmatn,Tahoma,sans-serif;
   min-height:100vh;
-}
-button,input,select{font:inherit}
-button{cursor:pointer}
-button:active{transform:scale(.98)}
-button:disabled{opacity:.45;cursor:not-allowed}
-.container{max-width:650px;margin:auto;padding:16px 13px 50px}
-.topbar{
-  display:flex;align-items:center;justify-content:space-between;
-  gap:12px;padding:12px 4px 20px
-}
-.brand{display:flex;align-items:center;gap:11px}
-.logo{
-  width:48px;height:48px;border-radius:17px;
-  display:grid;place-items:center;font-size:25px;
-  color:#07130c;
-  background:linear-gradient(145deg,#b1ffd0,#40f69b);
-  box-shadow:0 0 28px #4aff9b30
-}
-.brand h1{font-size:19px;margin:0;font-weight:900;letter-spacing:.4px}
-.brand p{font-size:11px;color:var(--muted);margin:3px 0 0}
-.status{
-  font-size:11px;color:var(--green);background:#10251c;
-  border:1px solid #234b36;padding:8px 10px;border-radius:30px;
-  white-space:nowrap
-}
-.dot{
-  display:inline-block;width:7px;height:7px;background:var(--green);
-  border-radius:50%;margin-left:5px;box-shadow:0 0 9px var(--green)
-}
-.card{
-  position:relative;overflow:hidden;
-  background:linear-gradient(145deg,rgba(22,32,42,.96),rgba(10,16,23,.96));
-  border:1px solid var(--line);border-radius:23px;
-  padding:19px;margin-bottom:15px;
-  box-shadow:0 12px 35px #00000020
-}
-.hero{
-  padding:24px 19px;
   background:
-    radial-gradient(ellipse at 90% 10%,#42ff9b17,transparent 50%),
-    linear-gradient(135deg,#14241e,#0d151d 65%,#111b26)
+    radial-gradient(ellipse at top,#103323 0%,transparent 55%),
+    var(--bg);
+  color:var(--text);
+  font-family:'Vazirmatn',sans-serif;
 }
-.hero:after{
-  content:"";position:absolute;width:180px;height:180px;
-  border:1px solid #6affaa13;border-radius:50%;
-  left:-90px;bottom:-120px;pointer-events:none
+
+button,input {font:inherit}
+button {cursor:pointer}
+button:active {transform:scale(.98)}
+.hidden {display:none!important}
+
+header {
+  position:sticky;
+  top:0;
+  z-index:5;
+  background:#050807ed;
+  border-bottom:1px solid var(--border);
+  padding:14px;
+  backdrop-filter:blur(15px);
 }
-.eyebrow{font-size:11px;color:var(--green);font-weight:800;letter-spacing:1px}
-.hero h2{font-size:25px;margin:9px 0 5px;line-height:1.6}
-.hero p,.muted{font-size:12px;color:var(--muted);line-height:2;margin:0}
-.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin-top:20px}
-.stat{
-  text-align:center;padding:14px 4px;
-  border:1px solid #ffffff0c;border-radius:16px;background:#080e12a8
+
+.header-inner {
+  max-width:800px;
+  margin:auto;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
 }
-.stat-icon{font-size:19px}
-.stat strong{display:block;font-size:19px;color:var(--green);margin:5px 0}
-.stat span{font-size:10px;color:var(--muted)}
-.section-title{display:flex;align-items:center;gap:10px;margin:0 0 14px}
-.section-icon{
-  width:39px;height:39px;display:grid;place-items:center;
-  border-radius:13px;background:#183126;border:1px solid #2c5740;font-size:19px
+
+.logo {
+  color:var(--green);
+  font-weight:900;
+  font-size:19px;
+  text-shadow:0 0 16px #00ff8855;
 }
-.section-title h2{font-size:16px;margin:0}
-.section-title p{font-size:11px;color:var(--muted);margin:3px 0 0}
-.game-options{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}
-.game-btn{
-  border:1px solid #283d36;border-radius:17px;padding:16px 3px;
-  background:linear-gradient(150deg,#15251f,#10171c);color:white;
-  transition:.2s
+
+.status {
+  color:var(--green);
+  font-size:11px;
+  border:1px solid #00ff8844;
+  border-radius:20px;
+  padding:5px 9px;
 }
-.game-btn:hover{border-color:var(--green);box-shadow:0 0 20px #51ff9b12}
-.game-btn .emoji{display:block;font-size:32px;margin-bottom:8px}
-.game-btn span:last-child{font-size:12px;font-weight:800}
-.game-cost{
-  margin-top:14px;border:1px solid #574a28;background:#241f13;
-  padding:10px 12px;border-radius:12px;font-size:11px;color:var(--yellow);
-  line-height:1.9
+
+main {
+  max-width:800px;
+  margin:auto;
+  padding:18px 13px 35px;
 }
-.result{
-  text-align:center;line-height:2;padding:13px 8px 0;
-  font-size:13px;font-weight:700;overflow-wrap:anywhere
+
+.card {
+  background:linear-gradient(145deg,#101c15,#08100c);
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:18px;
+  margin-bottom:14px;
+  box-shadow:0 10px 35px #0004;
 }
-.green{color:var(--green)}.red{color:var(--red)}.yellow{color:var(--yellow)}
-.field-label{display:block;font-size:12px;color:#bdc9d1;margin:13px 0 7px}
-.input,.select{
-  width:100%;padding:14px 13px;border-radius:13px;
-  color:white;background:#090f15;border:1px solid #293b43;
-  outline:none;transition:.2s
+
+.title {
+  font-size:24px;
+  font-weight:900;
+  margin:0 0 8px;
 }
-.input:focus,.select:focus{border-color:var(--green);box-shadow:0 0 0 3px #6affaa0d}
-.input::placeholder{color:#5d6b77}
-.btn{
-  display:flex;align-items:center;justify-content:center;gap:8px;
-  width:100%;padding:14px;border:0;border-radius:13px;
-  background:linear-gradient(110deg,#72ffac,#39e8bc);
-  color:#06150d;font-weight:900;margin-top:12px;
-  box-shadow:0 6px 20px #49ffa51a;transition:.2s
+
+.subtitle {
+  color:var(--muted);
+  font-size:13px;
+  line-height:2;
 }
-.btn-secondary{
-  color:#d6ffe6;background:#15251e;border:1px solid #2b4c3a;
-  box-shadow:none
+
+.neon {
+  color:var(--green);
+  text-shadow:0 0 15px #00ff8855;
 }
-.btn-danger{color:#ffdce2;background:#29151b;border:1px solid #572630;box-shadow:none}
-.two{display:grid;grid-template-columns:1fr 1fr;gap:9px}
-.two .btn{font-size:12px;padding:12px 5px}
-.divider{height:1px;background:#ffffff0c;margin:20px 0}
-.daily{
-  display:flex;align-items:center;justify-content:space-between;gap:12px;
-  background:linear-gradient(110deg,#282116,#191810);
-  border:1px solid #524426;border-radius:17px;padding:15px
+
+.center {text-align:center}
+
+label {
+  display:block;
+  color:#b6cabe;
+  font-size:13px;
+  margin:13px 0 7px;
 }
-.daily h3{font-size:13px;margin:0 0 4px}
-.daily p{font-size:11px;color:#c2b79b;margin:0}
-.daily button{border:0;border-radius:11px;background:var(--yellow);padding:11px 12px;font-size:11px;font-weight:900;white-space:nowrap;color:#201a08}
-.admin-head{
-  display:flex;justify-content:space-between;align-items:center;gap:8px;
-  margin-bottom:13px
+
+input {
+  width:100%;
+  background:#050b08;
+  color:white;
+  border:1px solid #234c36;
+  border-radius:11px;
+  padding:13px;
+  outline:none;
 }
-.admin-badge{
-  background:#271b2c;border:1px solid #54305a;color:#e8a7ff;
-  border-radius:9px;padding:7px 9px;font-size:10px
+
+input:focus {
+  border-color:var(--green);
+  box-shadow:0 0 0 3px #00ff8815;
 }
-.admin-card{
-  border-color:#4a3059;
-  background:
-    radial-gradient(ellipse at 100% 0%,#a34aff12,transparent 42%),
-    linear-gradient(145deg,#191323,#0d1119 65%)
+
+.btn {
+  width:100%;
+  padding:12px;
+  border-radius:11px;
+  font-weight:800;
+  margin-top:11px;
+  transition:.2s;
 }
-.admin-card .section-icon{background:#281b31;border-color:#50345e}
-.admin-card .btn{
-  background:linear-gradient(110deg,#d5a1ff,#8c78ff);
-  color:#160b25;box-shadow:0 6px 25px #b078ff16
+
+.primary {
+  background:linear-gradient(100deg,#00ff88,#8affba);
+  color:#00190c;
+  border:0;
 }
-.admin-card .btn-secondary{
-  color:#e6d8ff;background:#21192d;border:1px solid #45325a;box-shadow:none
+
+.secondary {
+  background:#00ff880d;
+  border:1px solid #00ff8844;
+  color:var(--green);
 }
-.admin-card .input:focus,.admin-card .select:focus{border-color:#bd8aff}
-.admin-card .input,.admin-card .select{border-color:#393047}
-.admin-card .input{background:#0d0c15}
-.admin-login{
-  background:#0d0c15;border:1px solid #392d48;border-radius:17px;padding:15px
+
+.danger {
+  background:#ff456410;
+  border:1px solid #ff456433;
+  color:#ff8295;
 }
-.hidden{display:none!important}
-.mode-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;margin:10px 0 15px}
-.mode-btn{
-  border:1px solid #393047;background:#100f19;color:#a9a1bb;
-  border-radius:12px;padding:12px 4px;font-size:11px;line-height:1.8
+
+.message {
+  font-size:13px;
+  margin-top:12px;
+  line-height:2;
+  overflow-wrap:anywhere;
+  white-space:pre-line;
 }
-.mode-btn.active{
-  border-color:#bc8aff;background:#281a38;color:#f1dfff;
-  box-shadow:inset 0 0 15px #bd8aff0c
+
+.error {color:#ff657b}
+.success {color:var(--green)}
+
+.grid {
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:10px;
 }
-.mode-btn b{display:block;font-size:19px}
-.preview{
-  margin-top:17px;border:1px solid #3e3050;background:#100e18;
-  border-radius:17px;padding:15px
+
+.stat {
+  background:#07100b;
+  border:1px solid var(--border);
+  padding:13px;
+  border-radius:13px;
 }
-.preview-title{font-size:12px;color:#c6a2ff;font-weight:800}
-.prize-code{
-  font-size:23px;letter-spacing:2px;text-align:center;direction:ltr;
-  color:#e6d0ff;background:#241932;border:1px dashed #a777da;
-  padding:17px 8px;border-radius:13px;margin:12px 0;overflow-wrap:anywhere
+
+.stat-label {
+  color:var(--muted);
+  font-size:12px;
 }
-#qr{
-  display:block;width:230px;max-width:100%;margin:15px auto;
-  background:white;padding:9px;border-radius:15px
+
+.stat-number {
+  color:var(--green);
+  font-size:25px;
+  font-weight:900;
+  margin-top:5px;
 }
-.link-box{
-  direction:ltr;overflow-wrap:anywhere;word-break:break-all;
-  font-size:11px;line-height:1.8;color:#b6c5d0;background:#080b10;
-  border:1px solid #30313b;border-radius:12px;padding:12px
+
+.vault {
+  width:175px;
+  height:175px;
+  max-width:60vw;
+  max-height:60vw;
+  border-radius:50%;
+  border:8px solid #1d6945;
+  background:radial-gradient(circle,#183e29,#07100b 70%);
+  box-shadow:0 0 30px #00ff8820,inset 0 0 25px #00ff8815;
+  margin:20px auto;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:62px;
+  transition:.4s;
 }
-.notice{
-  background:#151a24;border:1px solid #303744;border-radius:12px;
-  padding:12px;font-size:11px;line-height:2;color:#aebdca;margin-top:13px
+
+.vault.open {
+  border-color:var(--green);
+  box-shadow:0 0 50px #00ff8844;
+  transform:rotate(8deg);
 }
-.notice strong{color:var(--yellow)}
-.footer{text-align:center;color:#50616b;font-size:10px;padding:15px 0}
-.toast{
-  position:fixed;bottom:18px;left:50%;transform:translate(-50%,20px);
-  opacity:0;pointer-events:none;background:#e5ffef;color:#082012;
-  padding:12px 18px;border-radius:12px;font-size:12px;font-weight:900;
-  box-shadow:0 8px 30px #0007;transition:.25s;z-index:10;
-  width:max-content;max-width:90%
+
+.code-input {
+  text-align:center;
+  direction:ltr;
+  font-size:28px;
+  letter-spacing:10px;
 }
-.toast.show{opacity:1;transform:translate(-50%,0)}
-.small{font-size:10px;color:var(--muted);line-height:1.9}
-@media(max-width:370px){
- .container{padding:10px 8px 35px}
- .card{padding:14px;border-radius:19px}
- .hero h2{font-size:22px}
- .stat strong{font-size:16px}
- .game-btn .emoji{font-size:27px}
- .mode-btn{font-size:10px}
+
+.badge {
+  display:inline-block;
+  border:1px solid #00e5ff44;
+  color:var(--cyan);
+  border-radius:20px;
+  padding:5px 11px;
+  font-size:11px;
+}
+
+.qr-box {
+  margin-top:15px;
+  padding:13px;
+  border-radius:13px;
+  background:#fff;
+  color:#111;
+  text-align:center;
+  overflow-wrap:anywhere;
+}
+
+.qr-box img {
+  display:block;
+  width:210px;
+  height:210px;
+  max-width:100%;
+  margin:12px auto;
+}
+
+.list-item {
+  margin-top:10px;
+  padding:12px;
+  background:#060d09;
+  border:1px solid var(--border);
+  border-radius:11px;
+  overflow-wrap:anywhere;
+  font-size:13px;
+}
+
+.reward-amount {
+  color:#ffd76b;
+  font-size:38px;
+  font-weight:900;
+}
+
+footer {
+  color:#62776a;
+  text-align:center;
+  font-size:11px;
+  padding:20px;
+}
+
+@media(max-width:380px) {
+  .title {font-size:21px}
+  .card {padding:14px}
+  .logo {font-size:16px}
 }
 </style>
 </head>
-<body>
-<div class="container">
 
-<header class="topbar">
-  <div class="brand">
-    <div class="logo">💎</div>
-    <div>
-      <h1>JAM ARENA <span style="color:#6affaa">PRO</span></h1>
-      <p>ARENA • PLAY • WIN</p>
-    </div>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="logo">⚡ EZPRO HACKER</div>
+    <div class="status">● SYSTEM ONLINE</div>
   </div>
-  <div class="status"><span class="dot"></span>آنلاین در مرورگر</div>
 </header>
 
-<section class="card hero">
-  <div class="eyebrow">✦ به میدان رقابت خوش آمدی</div>
-  <h2>جم جمع کن،<br><span style="color:var(--green)">قهرمان شو!</span></h2>
-  <p>با ربات رقابت کن، بردهای متوالی بساز و از کدهای هدیه برای افزایش موجودی استفاده کن.</p>
-  <div class="stats">
-    <div class="stat">
-      <div class="stat-icon">💎</div>
-      <strong id="gems">۱٬۰۰۰</strong>
-      <span>موجودی جم</span>
-    </div>
-    <div class="stat">
-      <div class="stat-icon">🏆</div>
-      <strong id="wins">۰</strong>
-      <span>تعداد برد</span>
-    </div>
-    <div class="stat">
-      <div class="stat-icon">🎮</div>
-      <strong id="rounds">۰</strong>
-      <span>مسابقه‌ها</span>
-    </div>
-  </div>
-</section>
+<main>
 
-<section class="card">
-  <div class="section-title">
-    <div class="section-icon">⚔️</div>
-    <div><h2>میدان نبرد</h2><p>یک حرکت انتخاب کن و با ربات رقابت کن</p></div>
-  </div>
-  <div class="game-options">
-    <button class="game-btn" onclick="play('سنگ')">
-      <span class="emoji">✊</span><span>سنگ</span>
-    </button>
-    <button class="game-btn" onclick="play('کاغذ')">
-      <span class="emoji">✋</span><span>کاغذ</span>
-    </button>
-    <button class="game-btn" onclick="play('قیچی')">
-      <span class="emoji">✌️</span><span>قیچی</span>
-    </button>
-  </div>
-  <div class="game-cost">💎 هزینه هر مسابقه: ۱۰۰ جم<br>🏆 برد: ۱۵۰ جم جایزه | 💀 باخت: ۱۰۰ جم از دست می‌رود.</div>
-  <div class="result" id="result">آماده‌ای قهرمان؟ اولین حرکتت رو انتخاب کن! ⚡</div>
-  <div class="divider"></div>
-  <p class="muted" id="streakText" style="text-align:center">🔥 برد متوالی: ۰ از ۵</p>
-</section>
+<!-- صفحه اصلی بازی؛ بدون ورود -->
+<section id="gamePage">
 
-<section class="card">
-  <div class="section-title">
-    <div class="section-icon">🎁</div>
-    <div><h2>مرکز کدهای هدیه</h2><p>کد جایزه‌ات را وارد کن</p></div>
-  </div>
-  <label class="field-label" for="giftInput">کد هدیه</label>
-  <input class="input" id="giftInput" placeholder="مثلاً JAMVIP" autocomplete="off">
-  <button class="btn" onclick="redeemGift()">🎁 فعال‌سازی کد هدیه</button>
-  <div class="result" id="giftMsg"></div>
-  <div class="divider"></div>
-  <div class="daily">
-    <div><h3>🌟 جایزه روزانه</h3><p>هر روز ۵۰ جم رایگان</p></div>
-    <button onclick="dailyBonus()">دریافت +۵۰ 💎</button>
-  </div>
-  <div class="result" id="dailyMsg"></div>
-</section>
+  <div class="card">
+    <span class="badge">🎮 HACKING PROTOCOL</span>
+    <h1 class="title" style="margin-top:12px">
+      گاوصندوق <span class="neon">دیجیتالی</span>
+    </h1>
+    <p class="subtitle">
+      رمز چهاررقمی را پیدا کن، قفل را باز کن و امتیاز بگیر!
+    </p>
 
-<section class="card admin-card">
-  <div class="admin-head">
-    <div class="section-title" style="margin:0">
-      <div class="section-icon">👑</div>
-      <div><h2>مرکز مدیریت</h2><p>ساخت کد هدیه و QR جایزه</p></div>
-    </div>
-    <span class="admin-badge">ADMIN PANEL</span>
-  </div>
-
-  <div id="loginBox" class="admin-login">
-    <p class="muted">برای دسترسی به ابزارهای مدیریت وارد شو.</p>
-    <label class="field-label" for="adminUser">نام کاربری</label>
-    <input class="input" id="adminUser" placeholder="نام کاربری مدیر" autocomplete="username">
-    <label class="field-label" for="adminPass">رمز عبور</label>
-    <input class="input" id="adminPass" type="password" placeholder="رمز عبور مدیر" autocomplete="current-password">
-    <button class="btn" onclick="loginAdmin()">🔐 ورود به پنل مدیریت</button>
-  </div>
-
-  <div id="adminPanel" class="hidden">
-    <div class="notice"><strong>⚡ ساخت جایزه هوشمند</strong><br>نوع جایزه را انتخاب کن. لینک QR مقدار جم را با حروف انگلیسی رمزگذاری می‌کند.</div>
-
-    <label class="field-label">نوع جایزه</label>
-    <div class="mode-grid">
-      <button class="mode-btn active" data-mode="gems" onclick="setMode('gems')">
-        <b>💎</b>فقط جم
-      </button>
-      <button class="mode-btn" data-mode="code" onclick="setMode('code')">
-        <b>🎁</b>فقط کد
-      </button>
-      <button class="mode-btn" data-mode="both" onclick="setMode('both')">
-        <b>🎁💎</b>هر دو
-      </button>
-    </div>
-
-    <div id="amountGroup">
-      <label class="field-label" for="amount">مقدار جم جایزه</label>
-      <input class="input" id="amount" type="number" min="1" max="1000000000" placeholder="مثلاً ۵۰۰۰">
-    </div>
-
-    <div id="codeGroup" class="hidden">
-      <label class="field-label" for="newCode">کد هدیه دلخواه</label>
-      <input class="input" id="newCode" placeholder="مثلاً JAMVIP" maxlength="40" autocomplete="off">
-      <p class="small">از حروف انگلیسی، عدد، خط تیره یا زیرخط استفاده کن.</p>
-    </div>
-
-    <button class="btn" onclick="createPrize()">✨ ساخت جایزه</button>
-    <div class="result" id="adminMsg"></div>
-
-    <div id="preview" class="preview hidden">
-      <div class="preview-title">✦ پیش‌نمایش جایزه ساخته‌شده</div>
-      <div id="previewDetails" class="small" style="margin-top:9px"></div>
-
-      <div id="codeOutputBox" class="hidden">
-        <div class="prize-code" id="codeOutput"></div>
-        <button class="btn btn-secondary" onclick="copyCode()">📋 کپی کد هدیه</button>
+    <div class="grid">
+      <div class="stat">
+        <div class="stat-label">🪙 امتیاز من</div>
+        <div class="stat-number" id="score">0</div>
       </div>
-
-      <div id="qrOutputBox" class="hidden">
-        <img id="qr" alt="QR جایزه">
-        <div class="small" style="text-align:center">برای دریافت جایزه، QR را با مرورگر همان سایت باز کن.</div>
-        <div class="link-box" id="prizeLink"></div>
-        <div class="two">
-          <button class="btn btn-secondary" onclick="copyPrize()">📋 کپی لینک</button>
-          <button class="btn btn-secondary" onclick="downloadQR()">⬇️ ذخیره QR</button>
-        </div>
+      <div class="stat">
+        <div class="stat-label">🏆 مرحله</div>
+        <div class="stat-number" id="level">1</div>
       </div>
     </div>
+  </div>
 
-    <div class="notice">🔒 <strong>یادآوری:</strong> این پنل نمایشی و بدون سرور است. نام کاربری، رمز عبور و موجودی داخل کد قابل مشاهده یا دست‌کاری هستند؛ کد هدیه بین مرورگرهای مختلف به‌طور امن همگام‌سازی نمی‌شود.</div>
-    <button class="btn btn-danger" onclick="logoutAdmin()">خروج از پنل</button>
+  <div class="card center">
+    <div class="vault" id="vault">🔒</div>
+    <p class="subtitle" id="gameHint">
+      رمز مخفی را حدس بزن.
+    </p>
+
+    <input id="guess"
+      class="code-input"
+      inputmode="numeric"
+      maxlength="4"
+      placeholder="••••"
+      aria-label="رمز چهاررقمی">
+
+    <button class="btn primary" id="guessBtn">
+      🔓 بررسی رمز
+    </button>
+
+    <button class="btn secondary" id="newGameBtn">
+      🔄 مرحله جدید
+    </button>
+
+    <div id="gameMessage" class="message"></div>
+  </div>
+
+  <div class="card">
+    <h2 class="title">🏆 رکورد من</h2>
+    <p class="subtitle">
+      بهترین امتیاز:
+      <strong class="neon" id="bestScore">0</strong>
+    </p>
+  </div>
+
+  <button class="btn secondary" id="adminOpenBtn">
+    👑 ورود مدیر و ساخت QR
+  </button>
+
+</section>
+
+<!-- ورود مدیر فقط برای مدیریت QR -->
+<section id="loginPage" class="hidden">
+  <div class="card">
+    <div class="center" style="font-size:45px">🔐</div>
+    <h1 class="title center">
+      پنل <span class="neon">مدیریت</span>
+    </h1>
+    <p class="subtitle center">
+      برای ساخت QR جایزه وارد شو.
+    </p>
+
+    <label for="username">نام کاربری</label>
+    <input id="username" autocomplete="username"
+      placeholder="نام کاربری">
+
+    <label for="password">رمز عبور</label>
+    <input id="password" type="password"
+      autocomplete="current-password"
+      placeholder="رمز عبور">
+
+    <button class="btn primary" id="loginBtn">
+      ⚡ ورود به پنل
+    </button>
+
+    <div id="loginMessage" class="message error"></div>
+
+    <button class="btn secondary" id="loginBackBtn">
+      ↩️ بازگشت به بازی
+    </button>
   </div>
 </section>
 
-<footer class="footer">JAM ARENA PRO • ساخته‌شده برای رقابت ⚡</footer>
-</div>
-<div id="toast" class="toast"></div>
+<!-- پنل مدیریت -->
+<section id="adminPage" class="hidden">
+
+  <div class="card">
+    <h1 class="title">
+      👑 پنل <span class="neon">مدیریت</span>
+    </h1>
+    <p class="subtitle">
+      مقدار جم را انتخاب کن و QR اختصاصی بساز.
+    </p>
+
+    <div class="grid">
+      <div class="stat">
+        <div class="stat-label">🎁 تعداد جوایز این مرورگر</div>
+        <div class="stat-number" id="qrCount">0</div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">🪙 مجموع جم‌ها</div>
+        <div class="stat-number" id="totalGems">0</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2 class="title">🎁 ساخت QR جایزه</h2>
+
+    <label for="gemAmount">مقدار جم</label>
+    <input id="gemAmount" type="number"
+      min="1" max="1000000"
+      inputmode="numeric"
+      placeholder="مثلاً 500">
+
+    <label for="rewardName">نام جایزه</label>
+    <input id="rewardName" maxlength="50"
+      placeholder="مثلاً جایزه ویژه">
+
+    <button class="btn primary" id="createQrBtn">
+      ⚡ ساخت QR
+    </button>
+
+    <div id="adminMessage" class="message"></div>
+    <div id="qrResult"></div>
+  </div>
+
+  <div class="card">
+    <h2 class="title">📋 جوایز ساخته‌شده</h2>
+    <div id="qrList"></div>
+  </div>
+
+  <button class="btn secondary" id="adminBackBtn">
+    🎮 بازگشت به بازی
+  </button>
+
+  <button class="btn danger" id="logoutBtn">
+    خروج از پنل مدیریت
+  </button>
+
+</section>
+
+<!-- صفحه جایزه -->
+<section id="rewardPage" class="hidden">
+  <div class="card center">
+    <div style="font-size:55px">🎁</div>
+    <h1 class="title">
+      جایزه <span class="neon">ویژه</span>
+    </h1>
+
+    <div class="reward-amount" id="rewardAmount">0 جم</div>
+    <h2 id="rewardTitle">جایزه EZPRO</h2>
+
+    <div id="rewardMessage" class="message"></div>
+
+    <button class="btn primary" id="claimBtn">
+      🎁 ثبت نمایشی جایزه
+    </button>
+
+    <button class="btn secondary" id="rewardBackBtn">
+      🏠 بازگشت به بازی
+    </button>
+  </div>
+</section>
+
+</main>
+
+<footer>EZPRO HACKER ⚡ | DIGITAL VAULT</footer>
 
 <script>
- const $ = id => document.getElementById(id);
-const STORAGE_KEY = 'jam_arena_pro_v2';
-const ALPHABET = 'QWERTYUIOPASDFGHJKLZXCVBNM';
+'use strict';
 
-function loadState(){
-  try{
-    const s = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
-    return {
-      gems: Math.max(0, Number(s.gems ?? 1000) || 0),
-      wins: Math.max(0, Number(s.wins) || 0),
-      rounds: Math.max(0, Number(s.rounds) || 0),
-      streak: Math.max(0, Number(s.streak) || 0),
-      claimed: Array.isArray(s.claimed) ? s.claimed : [],
-      codes: Array.isArray(s.codes) ? s.codes : [],
-      lastDaily: s.lastDaily || ''
-    };
-  }catch(e){
-    return {gems:1000,wins:0,rounds:0,streak:0,claimed:[],codes:[],lastDaily:''};
+const $ = id => document.getElementById(id);
+
+const STORAGE = {
+  score: 'ezpro_hacker_score',
+  best: 'ezpro_hacker_best',
+  level: 'ezpro_hacker_level',
+  rewards: 'ezpro_hacker_rewards',
+  claimed: 'ezpro_hacker_claimed'
+};
+
+let secretCode = '';
+let attempts = 0;
+let solved = false;
+let currentReward = null;
+
+function readJSON(key, fallback) {
+  try {
+    const value = localStorage.getItem(key);
+    return value === null ? fallback : JSON.parse(value);
+  } catch {
+    return fallback;
   }
 }
-let state = loadState();
-let currentMode = 'gems';
-let currentPrizeLink = '';
-let currentCode = '';
 
-function save(){
-  try{localStorage.setItem(STORAGE_KEY, JSON.stringify(state));}
-  catch(e){toast('ذخیره اطلاعات مرورگر ممکن نشد');}
-  updateStats();
+function score() {
+  return Number(localStorage.getItem(STORAGE.score)) || 0;
 }
-function fmt(n){return Number(n).toLocaleString('fa-IR');}
-function updateStats(){
-  $('gems').textContent = fmt(state.gems);
-  $('wins').textContent = fmt(state.wins);
-  $('rounds').textContent = fmt(state.rounds);
-  $('streakText').textContent = '🔥 برد متوالی: ' + fmt(state.streak) + ' از ۵';
-}
-function toast(message){
-  const el = $('toast');
-  el.textContent = message;
-  el.classList.add('show');
-  clearTimeout(window.toastTimer);
-  window.toastTimer = setTimeout(()=>el.classList.remove('show'),2500);
-}
-function encodeNumber(number){
-  let n = Math.floor(Number(number));
-  if(!Number.isSafeInteger(n) || n < 0) return null;
-  if(n === 0) return ALPHABET[0];
-  let out = '';
-  while(n > 0){
-    out = ALPHABET[n % 26] + out;
-    n = Math.floor(n / 26);
-  }
-  return out;
-}
-function decodeNumber(text){
-  let n = 0;
-  for(const char of text){
-    const value = ALPHABET.indexOf(char);
-    if(value < 0) return null;
-    n = n * 26 + value;
-    if(!Number.isSafeInteger(n)) return null;
-  }
-  return n;
-}
-function play(choice){
-  if(state.gems < 100){
-    $('result').innerHTML = '<span class="red">💔 جم کافی نداری؛ از کد هدیه یا جایزه روزانه استفاده کن.</span>';
-    return;
-  }
 
-  state.gems -= 100;
-  state.rounds++;
-
-  const choices = ['سنگ','کاغذ','قیچی'];
-  const bot = choices[Math.floor(Math.random()*3)];
-  let message = '🤝 مساوی شد؛ هزینه مسابقه برنمی‌گردد.';
-  let color = 'yellow';
-
-  if(choice !== bot){
-    const won =
-      (choice === 'سنگ' && bot === 'قیچی') ||
-      (choice === 'کاغذ' && bot === 'سنگ') ||
-      (choice === 'قیچی' && bot === 'کاغذ');
-
-    if(won){
-      state.gems += 150;
-      state.wins++;
-      state.streak++;
-      message = '🏆 بردی! ۱۵۰ جم جایزه گرفتی.';
-      color = 'green';
-
-      if(state.streak >= 5){
-        state.gems += 500;
-        state.streak = 0;
-        message += '<br>🔥 جایزه ۵۰۰ جم برای ۵ برد متوالی!';
-      }
-    }else{
-      state.streak = 0;
-      message = '💀 باختی! ۱۰۰ جم هزینه مسابقه از دست رفت.';
-      color = 'red';
-    }
-  }else{
-    state.streak = 0;
-  }
-
-  $('result').innerHTML =
-    'تو: ' + choice + '　|　ربات: ' + bot +
-    '<br><span class="' + color + '">' + message + '</span>';
-  save();
+function level() {
+  return Number(localStorage.getItem(STORAGE.level)) || 1;
 }
-function today(){
-  const d = new Date();
-  return d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate();
-}
-function dailyBonus(){
-  if(state.lastDaily === today()){
-    $('dailyMsg').innerHTML = '<span class="yellow">⏳ جایزه امروز را قبلاً دریافت کردی.</span>';
-    return;
-  }
-  state.lastDaily = today();
-  state.gems += 50;
-  save();
-  $('dailyMsg').innerHTML = '<span class="green">🎉 ۵۰ جم به موجودی اضافه شد!</span>';
-}
-function redeemGift(){
-  const code = $('giftInput').value.trim().toUpperCase();
-  if(!code){
-    $('giftMsg').innerHTML = '<span class="red">اول کد هدیه را وارد کن.</span>';
-    return;
-  }
 
-  const prize = state.codes.find(item => item.code === code);
-  if(!prize){
-    $('giftMsg').innerHTML = '<span class="red">❌ این کد در این مرورگر ثبت نشده است.</span>';
-    return;
-  }
-  if(state.claimed.includes(code)){
-    $('giftMsg').innerHTML = '<span class="red">⛔ این کد قبلاً استفاده شده است.</span>';
-    return;
-  }
+function updateStats() {
+  $('score').textContent = score();
+  $('level').textContent = level();
+  $('bestScore').textContent =
+    Number(localStorage.getItem(STORAGE.best)) || 0;
+}
 
-  state.claimed.push(code);
-  state.gems += Math.max(0, Number(prize.gems) || 0);
-  save();
-  $('giftInput').value = '';
-  $('giftMsg').innerHTML = '<span class="green">🎉 کد فعال شد! +' + fmt(prize.gems) + ' جم</span>';
+function message(id, text, type = '') {
+  $(id).textContent = text;
+  $(id).className = 'message ' + type;
 }
-function loginAdmin(){
-  if($('adminUser').value === 'adminpanel' &&
-     $('adminPass').value === 'adminhbr'){
-    $('loginBox').classList.add('hidden');
-    $('adminPanel').classList.remove('hidden');
-    toast('خوش آمدی مدیر 👑');
-  }else{
-    toast('نام کاربری یا رمز اشتباه است');
-  }
-}
-function logoutAdmin(){
-  $('adminPanel').classList.add('hidden');
-  $('loginBox').classList.remove('hidden');
-  $('adminPass').value = '';
-  toast('از پنل خارج شدی');
-}
-function setMode(mode){
-  currentMode = mode;
-  document.querySelectorAll('.mode-btn').forEach(btn=>{
-    btn.classList.toggle('active', btn.dataset.mode === mode);
+
+function showPage(id) {
+  [
+    'gamePage',
+    'loginPage',
+    'adminPage',
+    'rewardPage'
+  ].forEach(page => {
+    $(page).classList.toggle('hidden', page !== id);
   });
-  $('amountGroup').classList.toggle('hidden', mode === 'code');
-  $('codeGroup').classList.toggle('hidden', mode === 'gems');
-  $('preview').classList.add('hidden');
-  $('adminMsg').textContent = '';
+
+  window.scrollTo({top:0,behavior:'smooth'});
 }
-function randomToken(){
-  const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
-  let token = '';
-  for(let i=0;i<8;i++) token += chars[Math.floor(Math.random()*chars.length)];
-  return token;
+
+function newLevel() {
+  secretCode = String(Math.floor(Math.random() * 10000))
+    .padStart(4,'0');
+
+  attempts = 0;
+  solved = false;
+
+  $('guess').value = '';
+  $('vault').textContent = '🔒';
+  $('vault').classList.remove('open');
+
+  $('gameHint').textContent =
+    'رمز چهاررقمی را حدس بزن و راهنمایی بگیر.';
+
+  message('gameMessage','');
 }
-function createPrize(){
-  let gems = 0;
-  let code = '';
 
-  if(currentMode !== 'code'){
-    gems = Number($('amount').value);
-    if(!Number.isSafeInteger(gems) || gems < 1 || gems > 1000000000){
-      $('adminMsg').innerHTML = '<span class="red">مقدار جم معتبر بین ۱ تا ۱٬۰۰۰٬۰۰۰٬۰۰۰ وارد کن.</span>';
-      return;
-    }
-  }
-  if(currentMode !== 'gems'){
-    code = $('newCode').value.trim().toUpperCase();
-    if(!/^[A-Z0-9_-]{3,40}$/.test(code)){
-      $('adminMsg').innerHTML = '<span class="red">کد باید ۳ تا ۴۰ حرف انگلیسی، عدد، _ یا - باشد.</span>';
-      return;
-    }
-    if(state.codes.some(item=>item.code === code)){
-      $('adminMsg').innerHTML = '<span class="red">این کد قبلاً در همین مرورگر ساخته شده است.</span>';
-      return;
-    }
-    // حالت فقط کد، یک جایزه پیش‌فرض ۵۰۰ جم دارد.
-    if(currentMode === 'code') gems = 500;
-    state.codes.push({code:code,gems:gems});
-    save();
-  }
-
-  currentCode = code;
-  $('preview').classList.remove('hidden');
-  $('codeOutputBox').classList.toggle('hidden', currentMode === 'gems');
-  $('qrOutputBox').classList.toggle('hidden', currentMode === 'code');
-
-  if(code){
-    $('codeOutput').textContent = code;
-  }
-
-  if(currentMode === 'code'){
-    $('previewDetails').textContent = 'کد هدیه ساخته شد • جایزه: ' + fmt(gems) + ' جم';
-    $('adminMsg').innerHTML = '<span class="green">✅ کد هدیه ساخته شد؛ QR لازم نیست.</span>';
-    currentPrizeLink = '';
+function checkGuess() {
+  if (solved) {
+    message(
+      'gameMessage',
+      'این مرحله حل شده است؛ مرحله جدید را شروع کن.',
+      'success'
+    );
     return;
   }
 
-  const payload = {
-    type:'jam-arena',
-    g:encodeNumber(gems),
-    c:code,
-    id:randomToken()
-  };
-  const encoded = btoa(unescape(encodeURIComponent(JSON.stringify(payload))))
-    .replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
-  currentPrizeLink = location.href.split('#')[0] + '#prize=' + encoded;
+  const guess = $('guess').value.trim();
 
-  $('previewDetails').textContent =
-    'مقدار جم با حروف رمزگذاری شده: ' + encodeNumber(gems) +
-    (code ? ' • همراه کد هدیه: ' + code : '');
+  if (!/^\d{4}$/.test(guess)) {
+    message(
+      'gameMessage',
+      'باید دقیقاً چهار رقم وارد کنی.',
+      'error'
+    );
+    return;
+  }
 
-  $('prizeLink').textContent = currentPrizeLink;
-  $('qr').src = 'https://api.qrserver.com/v1/create-qr-code/?size=320x320&data=' +
-    encodeURIComponent(currentPrizeLink);
+  attempts++;
 
-  $('adminMsg').innerHTML = '<span class="green">✨ جایزه و QR آماده شد!</span>';
-  $('preview').scrollIntoView({behavior:'smooth',block:'nearest'});
+  if (guess === secretCode) {
+    solved = true;
+
+    const earned = 10 + level() * 5;
+    const newScore = score() + earned;
+    const best = Math.max(
+      newScore,
+      Number(localStorage.getItem(STORAGE.best)) || 0
+    );
+
+    localStorage.setItem(STORAGE.score,newScore);
+    localStorage.setItem(STORAGE.best,best);
+    localStorage.setItem(STORAGE.level,level()+1);
+
+    $('vault').textContent = '🔓';
+    $('vault').classList.add('open');
+
+    $('gameHint').textContent = 'گاوصندوق با موفقیت باز شد!';
+
+    message(
+      'gameMessage',
+      `🎉 آفرین! ${earned} امتیاز گرفتی.`,
+      'success'
+    );
+
+    updateStats();
+    return;
+  }
+
+  const hint = Number(guess) > Number(secretCode)
+    ? 'رمز مخفی کوچک‌تر است.'
+    : 'رمز مخفی بزرگ‌تر است.';
+
+  const matching = [...guess].filter(
+    (digit,index) => digit === secretCode[index]
+  ).length;
+
+  message(
+    'gameMessage',
+    `❌ رمز اشتباه است!\n💡 ${hint}\n🎯 رقم‌های درست در جای درست: ${matching}`,
+    'error'
+  );
 }
-async function copyText(text){
-  try{
+
+function getRewards() {
+  const value = readJSON(STORAGE.rewards,[]);
+  return Array.isArray(value) ? value : [];
+}
+
+function saveRewards(rewards) {
+  localStorage.setItem(STORAGE.rewards,JSON.stringify(rewards));
+}
+
+function makeId() {
+  if (crypto.randomUUID) return crypto.randomUUID();
+
+  return Date.now().toString(36) +
+    Math.random().toString(36).slice(2);
+}
+
+function rewardURL(id) {
+  const url = new URL(location.href);
+  url.search = '';
+  url.hash = '';
+  url.searchParams.set('reward',id);
+  return url.href;
+}
+
+async function copyText(text) {
+  try {
     await navigator.clipboard.writeText(text);
-    toast('کپی شد! 📋');
-  }catch(e){
-    const input = document.createElement('textarea');
-    input.value = text;
-    document.body.appendChild(input);
-    input.select();
-    try{document.execCommand('copy');toast('کپی شد! 📋');}
-    catch(err){prompt('متن را کپی کن:',text);}
-    input.remove();
+    alert('لینک کپی شد! ✅');
+  } catch {
+    prompt('لینک را کپی کن:',text);
   }
 }
-function copyCode(){
-  if(currentCode) copyText(currentCode);
-}
-function copyPrize(){
-  if(currentPrizeLink) copyText(currentPrizeLink);
-}
-async function downloadQR(){
-  try{
-    const response = await fetch($('qr').src);
-    if(!response.ok) throw new Error('QR');
-    const blob = await response.blob();
-    const url = URL.createObjectURL(blob);
+
+function createQR() {
+  const amount = Number($('gemAmount').value);
+  const name = $('rewardName').value.trim() || 'جایزه EZPRO';
+
+  if (!Number.isSafeInteger(amount) || amount < 1 ||
+      amount > 1000000) {
+    message(
+      'adminMessage',
+      'مقدار جم باید عدد صحیح بین ۱ تا ۱٬۰۰۰٬۰۰۰ باشد.',
+      'error'
+    );
+    return;
+  }
+
+  const reward = {
+    id: makeId(),
+    amount,
+    name,
+    createdAt: new Date().toISOString()
+  };
+
+  const rewards = getRewards();
+  rewards.unshift(reward);
+
+  try {
+    saveRewards(rewards);
+  } catch {
+    message(
+      'adminMessage',
+      'ذخیره‌سازی مرورگر انجام نشد.',
+      'error'
+    );
+    return;
+  }
+
+  $('gemAmount').value = '';
+  $('rewardName').value = '';
+
+  renderRewards();
+
+  const url = rewardURL(reward.id);
+  const imageURL =
+    'https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=' +
+    encodeURIComponent(url);
+
+  $('qrResult').replaceChildren();
+
+  const box = document.createElement('div');
+  box.className = 'qr-box';
+
+  const title = document.createElement('h3');
+  title.textContent = '🎁 ' + reward.name;
+
+  const amountText = document.createElement('p');
+  amountText.textContent = reward.amount + ' جم';
+
+  const img = document.createElement('img');
+  img.src = imageURL;
+  img.alt = 'QR جایزه';
+
+  const link = document.createElement('p');
+  link.style.direction = 'ltr';
+  link.textContent = url;
+
+  const copy = document.createElement('button');
+  copy.className = 'btn primary';
+  copy.textContent = '📋 کپی لینک';
+  copy.onclick = () => copyText(url);
+
+  const download = document.createElement('button');
+  download.className = 'btn secondary';
+  download.textContent = '⬇️ دانلود تصویر QR';
+  download.onclick = () => {
     const a = document.createElement('a');
-    a.href = url;
-    a.download = 'jam-arena-qr.png';
-    document.body.appendChild(a);
+    a.href = imageURL;
+    a.download = 'ezpro-reward.png';
+    a.target = '_blank';
+    a.rel = 'noopener';
     a.click();
-    a.remove();
-    setTimeout(()=>URL.revokeObjectURL(url),1000);
-  }catch(e){
-    toast('روی QR نگه‌دار و ذخیره تصویر را بزن.');
+  };
+
+  box.append(title,amountText,img,link,copy,download);
+  $('qrResult').appendChild(box);
+
+  message(
+    'adminMessage',
+    'QR ساخته شد. توجه: جوایز در این نسخه فقط محلی ذخیره می‌شوند.',
+    'success'
+  );
+}
+
+function renderRewards() {
+  const rewards = getRewards();
+
+  $('qrCount').textContent = rewards.length;
+  $('totalGems').textContent = rewards.reduce(
+    (sum,item) => sum + (Number(item.amount) || 0),
+    0
+  );
+
+  const list = $('qrList');
+  list.replaceChildren();
+
+  if (!rewards.length) {
+    const empty = document.createElement('p');
+    empty.className = 'subtitle';
+    empty.textContent = 'هنوز جایزه‌ای ساخته نشده است.';
+    list.appendChild(empty);
+    return;
+  }
+
+  rewards.forEach(reward => {
+    const item = document.createElement('div');
+    item.className = 'list-item';
+
+    const title = document.createElement('strong');
+    title.textContent =
+      `🎁 ${reward.name} — ${reward.amount} جم`;
+
+    const link = document.createElement('p');
+    link.style.direction = 'ltr';
+    link.textContent = rewardURL(reward.id);
+
+    const copy = document.createElement('button');
+    copy.className = 'btn secondary';
+    copy.textContent = '📋 کپی لینک';
+    copy.onclick = () => copyText(rewardURL(reward.id));
+
+    const remove = document.createElement('button');
+    remove.className = 'btn danger';
+    remove.textContent = '🗑️ حذف';
+    remove.onclick = () => {
+      if (!confirm('این جایزه حذف شود؟')) return;
+
+      saveRewards(
+        getRewards().filter(r => r.id !== reward.id)
+      );
+
+      renderRewards();
+      $('qrResult').replaceChildren();
+    };
+
+    item.append(title,link,copy,remove);
+    list.appendChild(item);
+  });
+}
+
+function openReward(id) {
+  const reward = getRewards().find(r => r.id === id);
+
+  showPage('rewardPage');
+
+  if (!reward) {
+    currentReward = null;
+
+    $('rewardAmount').textContent = '❌';
+    $('rewardTitle').textContent = 'جایزه پیدا نشد';
+    $('claimBtn').classList.add('hidden');
+
+    message(
+      'rewardMessage',
+      'این جایزه در مرورگر فعلی وجود ندارد.',
+      'error'
+    );
+    return;
+  }
+
+  currentReward = reward;
+
+  $('rewardAmount').textContent = reward.amount + ' جم';
+  $('rewardTitle').textContent = reward.name;
+  $('claimBtn').classList.remove('hidden');
+
+  const claimed = readJSON(STORAGE.claimed,[]);
+  const alreadyClaimed =
+    Array.isArray(claimed) && claimed.includes(reward.id);
+
+  $('claimBtn').disabled = alreadyClaimed;
+  $('claimBtn').textContent = alreadyClaimed
+    ? '✅ قبلاً ثبت شده'
+    : '🎁 ثبت نمایشی جایزه';
+
+  message(
+    'rewardMessage',
+    alreadyClaimed
+      ? 'این جایزه قبلاً در همین مرورگر ثبت شده است.'
+      : 'این یک جایزه نمایشی است؛ دریافت آن جم واقعی بازی را اضافه نمی‌کند.',
+    alreadyClaimed ? 'error' : ''
+  );
+}
+
+function claimReward() {
+  if (!currentReward) return;
+
+  const claimed = readJSON(STORAGE.claimed,[]);
+  const ids = Array.isArray(claimed) ? claimed : [];
+
+  if (ids.includes(currentReward.id)) {
+    message(
+      'rewardMessage',
+      'این جایزه قبلاً در همین مرورگر ثبت شده است.',
+      'error'
+    );
+    return;
+  }
+
+  ids.push(currentReward.id);
+  localStorage.setItem(STORAGE.claimed,JSON.stringify(ids));
+
+  $('claimBtn').disabled = true;
+  $('claimBtn').textContent = '✅ ثبت شد';
+
+  message(
+    'rewardMessage',
+    `🎉 شما ${currentReward.amount} جم جایزه دریافت کردید! 🎁\nاین پیام نمایشی است و جم واقعی به حساب بازی اضافه نمی‌کند.`,
+    'success'
+  );
+}
+
+function login() {
+  if (
+    $('username').value.trim() === 'adminpanel' &&
+    $('password').value === 'adminhbr'
+  ) {
+    $('password').value = '';
+    showPage('adminPage');
+    renderRewards();
+    message('loginMessage','');
+  } else {
+    message(
+      'loginMessage',
+      'نام کاربری یا رمز عبور اشتباه است.',
+      'error'
+    );
   }
 }
-function claimFromQR(){
-  if(!location.hash.startsWith('#prize=')) return;
-  try{
-    const raw = location.hash.slice(7).replace(/-/g,'+').replace(/_/g,'/');
-    const payload = JSON.parse(decodeURIComponent(escape(atob(raw))));
-    if(payload.type !== 'jam-arena' || !payload.id) return;
 
-    const key = 'jam_arena_qr_claimed_' + payload.id;
-    if(localStorage.getItem(key)){
-      toast('این QR قبلاً در این مرورگر استفاده شده است.');
-      return;
-    }
+function logout() {
+  $('username').value = '';
+  $('password').value = '';
+  showPage('gamePage');
+}
 
-    const gems = decodeNumber(payload.g);
-    if(gems === null || gems < 0) throw new Error('invalid');
+$('guessBtn').addEventListener('click',checkGuess);
 
-    state.gems += gems;
-    if(payload.c){
-      const code = String(payload.c).toUpperCase();
-      if(!state.codes.some(item=>item.code===code)){
-        state.codes.push({code:code,gems:gems});
-      }
-      if(!state.claimed.includes(code)) state.claimed.push(code);
-    }
+$('guess').addEventListener('keydown',event => {
+  if (event.key === 'Enter') checkGuess();
+});
 
-    localStorage.setItem(key,'1');
-    save();
-    alert('🎁 شما ' + fmt(gems) + ' جم جایزه دریافت کردید 🎉');
-    history.replaceState(null,'',location.pathname+location.search);
-  }catch(e){
-    toast('لینک جایزه معتبر نیست.');
+$('newGameBtn').addEventListener('click',newLevel);
+
+$('adminOpenBtn').addEventListener('click',() => {
+  showPage('loginPage');
+});
+
+$('loginBtn').addEventListener('click',login);
+
+$('password').addEventListener('keydown',event => {
+  if (event.key === 'Enter') login();
+});
+
+$('username').addEventListener('keydown',event => {
+  if (event.key === 'Enter') login();
+});
+
+$('loginBackBtn').addEventListener('click',() => {
+  showPage('gamePage');
+});
+
+$('createQrBtn').addEventListener('click',createQR);
+
+$('adminBackBtn').addEventListener('click',() => {
+  showPage('gamePage');
+  updateStats();
+});
+
+$('logoutBtn').addEventListener('click',logout);
+
+$('claimBtn').addEventListener('click',claimReward);
+
+$('rewardBackBtn').addEventListener('click',() => {
+  history.replaceState(null,'',location.pathname);
+  showPage('gamePage');
+});
+
+function init() {
+  updateStats();
+  newLevel();
+  renderRewards();
+
+  const rewardId =
+    new URLSearchParams(location.search).get('reward');
+
+  if (rewardId) {
+    openReward(rewardId);
+  } else {
+    showPage('gamePage');
   }
 }
-updateStats();
-claimFromQR();
+
+init();
 </script>
+
 </body>
 </html>
