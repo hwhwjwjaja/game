@@ -689,7 +689,7 @@ function claimFromQR(){
 
     localStorage.setItem(key,'1');
     save();
-    alert('🎉 جایزه دریافت شد: ' + encodeNumber(gems) + ' جم');
+    alert('🎁 شما ' + fmt(gems) + ' جم جایزه دریافت کردید 🎉');
     history.replaceState(null,'',location.pathname+location.search);
   }catch(e){
     toast('لینک جایزه معتبر نیست.');
